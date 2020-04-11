@@ -14,6 +14,7 @@ public class SeparadoraCamelCase {
           }
         return this.listaSeparada;
     }
+
     private void preencherLista(String original){
         if (!validaCamelCase(original) ){
             listaSeparada.add(original.toLowerCase());
