@@ -7,6 +7,14 @@ public class SeparadoraCamelCase {
     private final List<String> listaSeparada = new ArrayList<>();
 
     public List<String> converterCamelCase(String original) {
+          if(validaStringDeEntrada(original)){
+              preencherLista(original);
+          } else {
+              this.listaSeparada.add("inválido");
+          }
+        return this.listaSeparada;
+    }
+    private void preencherLista(String original){
         if (!validaCamelCase(original) ){
             listaSeparada.add(original.toLowerCase());
         } else if (!original.matches(".*\\d.*")){
@@ -14,8 +22,6 @@ public class SeparadoraCamelCase {
         } else {
             adicionaLetrasENumeros(original.split("(?=[A-Z])"));
         }
-
-        return this.listaSeparada;
     }
 
     private void adicionaPalavras(String[] palavrasEmCamelCase){
@@ -54,4 +60,18 @@ public class SeparadoraCamelCase {
         return false;
     }
 
+    private boolean validaStringDeEntrada(String stringParaValidacao) {
+        return !Character.isDigit(stringParaValidacao.charAt(0)) && !validaCaracteresEspeciais(stringParaValidacao);
+    }
+
+    private boolean validaCaracteresEspeciais(String stringParaValidacao) {
+        int i = 0;
+        while (i < stringParaValidacao.length()){
+            if (!Character.isDigit(stringParaValidacao.charAt(i)) && !Character.isLetter(stringParaValidacao.charAt(i))) {
+                return true;
+            }
+            i ++;
+        }
+        return false;
+    }
 }
